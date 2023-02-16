@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { AppHeaderConfig } from '../config';
 import UserList from '../users/UserList';
 
 const pagePerCount = 10;
@@ -27,9 +28,7 @@ const Users = () => {
         setIsLoading(true)
         fetch(API, {
             method: 'GET',
-            headers: {
-                "app-id": "63ece745d921a32f719a1097",
-            },
+            ...AppHeaderConfig
         }).then(datas => datas.json()).then(datas => {
             setUsers(datas.data);
             setFilteredUsers(datas.data);
@@ -40,7 +39,8 @@ const Users = () => {
 
     return (
         <div className="home">
-            <div className='border border-gray p-10 mb-5'>
+            <div className='border border-gray p-10 mb-5 flex justify-center'>
+                <h1 className='pr-3'>Filter Users :</h1>
                 <input onInput={(e) => search(e.currentTarget.value)} />
             </div>
             {
